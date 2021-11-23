@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/techieasif/clit/cmd"
+import "github.com/techieasif/glit/cmd"
 
 func main() {
 	cmd.Execute()

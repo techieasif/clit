@@ -45,17 +45,16 @@ type Joke struct {
 	Status int    `json:"status"`
 }
 
+func getJoke() {
+	url := "https://icanhazdadjoke.com/"
+	respBytes := getJokeFromApi(url)
+	joke := Joke{}
 
-func getJoke(){
- url := "https://icanhazdadjoke.com/"
- respBytes := getJokeFromApi(url)
- joke := Joke{}
+	if err := json.Unmarshal(respBytes, &joke); err != nil {
+		fmt.Printf("Could not unmarshal reponseBytes. %v", err)
+	}
 
- if err := json.Unmarshal(respBytes, &joke); err != nil {
-	fmt.Printf("Could not unmarshal reponseBytes. %v", err)
- }
-
- fmt.Println(string(joke.Joke))
+	fmt.Println(string(joke.Joke))
 }
 
 func getJokeFromApi(baseApi string) []byte {
@@ -70,7 +69,7 @@ func getJokeFromApi(baseApi string) []byte {
 	}
 
 	request.Header.Add("Accept", "application/json")
-	request.Header.Add("User-Agent", "clit CLI (https://github.com/techieasif/clit)")
+	request.Header.Add("User-Agent", "glit CLI (https://github.com/techieasif/glit)")
 
 	resp, err := http.DefaultClient.Do(request)
 	if err != nil {
